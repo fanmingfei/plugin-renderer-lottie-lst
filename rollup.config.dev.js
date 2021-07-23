@@ -46,7 +46,7 @@ export default {
     serve({
       open: true,
       contentBase: publicDir,
-      host: 'localhost',
+      host: '0.0.0.0',
       port: 8080,
     }),
     livereload(exampleDir),

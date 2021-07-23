@@ -1,2 +1,3 @@
-export { default as Demo } from './component';
-export { default as DemoSystem } from './system';
+import SpineSystem from './SpineSystem';
+import Spine, {SpineParams} from './Spine';
+export {Spine, SpineSystem, SpineParams};

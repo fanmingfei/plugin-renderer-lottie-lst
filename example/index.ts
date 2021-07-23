@@ -1,61 +1,54 @@
-import { Game, GameObject } from '@eva/eva.js';
+import { Game, GameObject, resource } from '@eva/eva.js';
 import { RendererSystem } from '@eva/plugin-renderer';
-import { Text, TextSystem } from '@eva/plugin-renderer-text';
-import { DemoSystem } from '../src'
+import { SpineSystem, Spine } from '../src'
 
 const game = new Game({
   systems: [
     new RendererSystem({
       canvas: document.querySelector('#canvas'),
-      width: 800,
-      height: 600,
+      width: 750,
+      height: 1000,
     }),
-    new TextSystem(),
-    new DemoSystem(),
+    new SpineSystem(),
   ],
 });
 
 game.scene.transform.size = {
-  width: 800,
-  height: 600
+  width: 750,
+  height: 1000
 }
 
-const text = new GameObject("text", {
+const go = new GameObject("text", {
   position: {
     x: 0,
     y: 0
-  },
-  origin: {
-    x: 0.5,
-    y: 0.5
-  },
-  anchor: {
-    x: 0.5,
-    y: 0.5
   }
 });
 
-text.addComponent(new Text({
-  text: "欢迎使用EVA互动游戏开发体系！",
-  style: {
-    fontFamily: "Arial",
-    fontSize: 36,
-    fontStyle: "italic",
-    fontWeight: "bold",
-    fill: ["#b35d9e", "#84c35f", "#ebe44f"], // gradient
-    fillGradientType: 1,
-    fillGradientStops: [0.1, 0.4],
-    stroke: "#4a1850",
-    strokeThickness: 5,
-    dropShadow: true,
-    dropShadowColor: "#000000",
-    dropShadowBlur: 4,
-    dropShadowAngle: Math.PI / 6,
-    dropShadowDistance: 6,
-    wordWrap: true,
-    wordWrapWidth: 400,
-    breakWords: true
-  }
-}));
+// 这里资源自己填写
+resource.addResource([
+  {
+    name: 'anim',
+    type: 'SPINE',
+    src: {
+      ske: {
+        type: 'json',
+      },
+      atlas: {
+        type: 'atlas',
+      },
+      image: {
+        type: 'png',
+      },
+    },
+  },
+]);
 
-game.scene.addChild(text);
+const spine = new Spine({resource: 'anim', animationName: 'chui'});
+go.addComponent(spine);
+spine.on('complete', e => {
+  console.log('动画播放结束', e.name);
+});
+spine.play('chui');
+
+game.scene.addChild(go)

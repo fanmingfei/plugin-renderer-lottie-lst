@@ -1,6 +1,6 @@
 {
-  "name": "eva-plugin-demo",
-  "version": "0.1.0",
+  "name": "eva-plugin-renderer-lottie",
+  "version": "1.0.0",
   "scripts": {
     "dev": "rollup -c rollup.config.dev.js -w",
     "build": "node ./scripts/build.js",
@@ -10,8 +10,8 @@
   },
   "main": "index.js",
   "module": "./dist/plugin.esm.js",
-  "typings": "./dist/eva-plugin-demo.d.ts",
-  "bundle": "EVA.plugin.demo",
+  "typings": "./dist/eva-plugin-renderer-lottie.d.ts",
+  "bundle": "EVA.plugin.renderer.lottie",
   "keywords": [
     "eva.js",
     "plugin"
